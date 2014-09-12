@@ -1,3 +1,33 @@
+################################################################################
+# 	Copyright (c) 2014 Jake Drahos <drahos@iastate.edu>
+# All rights reserved.
+
+# Redistribution and use in source and binary forms, with or without modification, 
+# are permitted provided that the following conditions are met:
+
+# 1. Redistributions of source code must retain the above copyright notice, this 
+# list of conditions and the following disclaimer.
+
+# 2. Redistributions in binary form must reproduce the above copyright notice, 
+# this list of conditions and the following disclaimer in the documentation and/or 
+# other materials provided with the distribution.
+
+# 3. Neither the name of the copyright holder nor the names of its contributors 
+# may be used to endorse or promote products derived from this software without 
+# specific prior written permission.
+
+# THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
+# ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED 
+# WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE 
+# DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR:w
+
+# ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES 
+# (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; 
+# LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON 
+# ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT 
+# (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS 
+# SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+################################################################################
 PROCESSOR=stm32f4
 BOARD=nucleo
 
@@ -10,7 +40,7 @@ OUTPUT_FILE_NAME=nucleo-1.elf
 #####
 # Roots for include dirs and source code files of drivers
 #####
-PROJECT_ROOT=/home/jake/embedded-tools/projects/Nucleo-1
+PROJECT_ROOT=$(HOME)/embedded-tools/projects/Nucleo-1
 
 DRIVERS_ROOT=/opt/cross/stm32f4/Drivers
 
@@ -70,18 +100,6 @@ INCLUDE_DIRS=$(PROJECT_ROOT)/inc
  INCLUDE_DIRS+= $(HAL_INC)
 
 INCLUDE_FLAGS=$(foreach d, $(INCLUDE_DIRS), -I$d)
-
-#####
-# Setup additional source files to be compiled
-#####
-
-ADDITIONAL_SRC=
-ADDITIONAL_BSP_SRC=$(foreach f, $(BSP_OBJECTS), $(BSP_SRC)/$f)
-ADDITIONAL_HAL_SRC=$(foreach f, $(HAL_OBJECTS), $(HAL_SRC)/$f)
-
-ADDITIONAL_SRC+= $(CMSIS_DEVICE_TEMPLATES)/$(CMSIS_OBJECTS)
-ADDITIONAL_SRC+= $(ADDITIONAL_HAL_SRC)
-ADDITIONAL_SRC+= $(ADDITIONAL_BSP_SRC)
 
 #####
 # Set compiler options

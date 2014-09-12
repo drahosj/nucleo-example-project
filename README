@@ -1,0 +1,65 @@
+This is a configured/tweaked project, meant to build with the open-source
+toolchain and BSD licensed drivers from STMicro.
+
+Dependencies:
+    - STM32CubeF4: (from STMicro) That is the source of this original project.
+    - gcc-arm-none-embedded: The official ARM Embedded GCC toolchain
+    - st-linkv2: From a Github repo. 
+    
+    Install st-linkv2. /configure, make, sudo make install. Some extra udev
+    rules will need to be added. They are in the source directory; read the
+    READMEs and then copy the necessary rules.
+    
+    Install gcc-arm-none-embedded using the build scripts provided. Check
+    ARM's documentation on the matter. Know that the scripts are meant for
+    Ubuntu and might break. There are pretty good resources out there on 
+    tweaking the build scripts for your platform. Mostly, all that tends to
+    break is the documentation. Who needs that anyway?
+    
+    Extract STM32CubeF4. That's it.
+
+The Makefile expects the following setup:
+    
+    arm-none-eabi-(binutils/gcc) in path
+    STM32CubeF4 drivers in /opt/cross/stm32f4/Drivers
+    Project root in $(HOME)/embedded-tools/projects/Nucleo-1
+    
+    All of these roots are easily changed in the Makefile.
+    
+Building and loading
+
+    start st-util in an extra terminal and let it run
+    
+    make
+    
+    make debug
+    
+    at the gdb prompt, continue
+    
+    ctrl-c and q to quit.
+    
+    The dependency resolution of the Makefile is a joke right now. Make cleans
+    are highly recommended for major changes.
+    
+Configuring and extending
+    Copy the project, then change the project root and you should be good to go.
+
+    In the Makefile, additional abstraction features from STMicro can be 
+    turned on and off by commenting the line for INCLUDE_DIRS+= and removing
+    it from ALL_OBJECTS=
+    
+    It's recommended to at least use CMSIS in your projects, otherwise you
+    are probably crazy.
+    
+Changing the board:
+    Change the BSP_BOARD_NAME. It gets embedded into the path to the BSP stuff,
+    so make sure it's the exact right name.
+    
+Changing the device:
+    Change DEVICE_ID. Also write a new linker script. Godspeed.
+    
+License info:
+    Everything I wrote is related to this project (Makefile, linker script) is
+    released under a BSD 3-clause license. As far as I can tell, all of
+    STMicro's stuff is also released under a BSD 3-Clause license, so everything
+    that the Makefile pulls in should be 100% free BSD code.
