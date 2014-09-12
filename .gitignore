@@ -1,0 +1,5 @@
+*.swp
+*.o
+*.kate-swp
+image.out
+*.kdev4
