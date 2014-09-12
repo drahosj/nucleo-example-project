@@ -2,11 +2,6 @@
 
     Linker Script for STM32F411RE
     
-    This script is intended to work with STMicroelectronics' setup files
-    provided in STM32CubeF4.
-    
-    This script defines the following:
-    
     
 Copyright (c) 2014 Jake Drahos <drahos@iastate.edu>
 All rights reserved.
@@ -39,10 +34,47 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 **/
 
 /**
-* Defines the following sections:
-*
-* Defines the following globals:
-*
+    This script is intended to work with STMicroelectronics' setup files
+    provided in STM32CubeF4.
+    
+* Uses the following input sections:
+    .isr_vector
+    
+    .text
+    .text*
+    .init
+    .eh_frame
+    
+    .data
+    
+    .bss
+    .bss*
+    
+    .rodata
+    .rodata*
+    
+    .init_array
+    .init_array*
+    
+    .fini_array
+    .fini_array*
+    
+    .ARM
+    .ARM.exidx
+    
+    .jcr
+
+* Defines the following globals (used by the setup file):
+
+    _estack
+    _sdata __data_start__
+    _edata __data_end__
+    
+    _sbss __bss_start__
+    _ebss __bss_end__
+    
+    _sidata
+
 /* Entry */
 
 ENTRY(Reset_Handler)
